@@ -1,0 +1,12 @@
+Algorithm: Evaluation of Postfix Expression using Stack
+*******************************************************
+
+ 1. Scan the Postfix string from left to right.
+ 2. Initialize an empty stack.
+ 3. Repeat steps 4 and 5 till all the characters are scanned.
+ 4. If the scanned character is an operand, push it onto the stack.
+ 5. If the scanned character is an operator (op), then pop two elements from the stack 
+    and store the value in A and B respectively, calculate B op A and push it back to the stack.
+ 6. After all characters are scanned, we will have one element in the stack.
+ 7. Return top of the stack as result.
+
