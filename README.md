@@ -1,3 +1,3 @@
 # Data Structures and Algorithms
 <br>
-<h1>For personal practice and future reference.</h1>
+<h2>For practice and future reference.</h2>
