@@ -25,29 +25,24 @@ void getVerticalOrder(node *root, int hd, map<int, vector<int>> &m)
 
 vector<vector<int>> verticalTraversal(node *root)
 {
+    solve(root, 0, 0);
+
     vector<vector<int>> ans;
 
-    map<int, vector<int>> m;
-
-    getVerticalOrder(root, 0, m);
-
-    for (auto i : m)
+    for (auto it1 : m)
     {
-        ans.push_back(i.second);
     }
-
-    return ans;
 }
 
 int main()
 {
-    node *root = new node(10);
-    root->left = new node(20);
-    root->right = new node(30);
-    root->left->left = new node(40);
-    root->left->right = new node(60);
-    root->right->left = new node(90);
-    root->right->right = new node(100);
+    node *root = new node(1);
+    root->left = new node(2);
+    root->right = new node(3);
+    root->left->left = new node(4);
+    root->left->right = new node(6);
+    root->right->left = new node(5);
+    root->right->right = new node(7);
 
     vector<vector<int>> ans = verticalTraversal(root);
 
