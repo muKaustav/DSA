@@ -14,7 +14,8 @@ public:
 	}
 };
 
-void insertAtTail(node *&head, int val){
+void insertAtTail(node *&head, int val)
+{
 	node *n = new node(val);
 
 	if (head == NULL)
@@ -33,13 +34,15 @@ void insertAtTail(node *&head, int val){
 	temp->next = n;
 }
 
-node* addTwoNumbers(node* l1, node* l2){
-	node* result = new node(0);
-	node* temp = result;
+node *addTwoNumbers(node *l1, node *l2)
+{
+	node *result = new node(0);
+	node *temp = result;
 
 	int carry = 0;
 
-	while(l1 != NULL || l2 != NULL){
+	while (l1 != NULL || l2 != NULL)
+	{
 		int num1, num2, sum;
 
 		num1 = (l1 != NULL) ? l1->data : 0;
@@ -51,20 +54,21 @@ node* addTwoNumbers(node* l1, node* l2){
 		temp->next = new node(sum % 10);
 		temp = temp->next;
 
-		if(l1 != NULL)
+		if (l1 != NULL)
 			l1 = l1->next;
 
-		if(l2 != NULL)
+		if (l2 != NULL)
 			l2 = l2->next;
 	}
 
-	if(carry > 0)
+	if (carry > 0)
 		temp->next = new node(carry);
 
 	return result->next;
 }
 
-void display(node *head){
+void display(node *head)
+{
 	node *temp = head;
 
 	while (temp != NULL)
@@ -76,7 +80,8 @@ void display(node *head){
 	cout << "NULL" << endl;
 }
 
-int main(){
+int main()
+{
 
 	node *head1 = NULL;
 	node *head2 = NULL;
@@ -88,7 +93,7 @@ int main(){
 
 	insertAtTail(head2, 5);
 	insertAtTail(head2, 6);
-	insertAtTail(head2, 4);	
+	insertAtTail(head2, 4);
 
 	newhead = addTwoNumbers(head1, head2);
 

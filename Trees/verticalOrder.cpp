@@ -31,6 +31,7 @@ vector<vector<int>> verticalTraversal(node *root)
 
     for (auto it1 : m)
     {
+        
     }
 }
 
