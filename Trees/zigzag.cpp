@@ -13,6 +13,23 @@ public:
     }
 };
 
+<<<<<<< HEAD
+vector<int> zigZagTraversal(node *root)
+{
+    vector<int> ans;
+
+    
+}
+
+void preorder(node *root)
+{
+    if (!root)
+        return;
+
+    cout << root->data << " ";
+    preorder(root->left);
+    preorder(root->right);
+=======
 vector<vector<int>> zigzagLevelOrder(node *root)
 {
     vector<vector<int>> ans;
@@ -49,6 +66,7 @@ vector<vector<int>> zigzagLevelOrder(node *root)
     }
 
     return ans;
+>>>>>>> c7b590fee7d4ab3758d25d6ea8016b29a8e1e27c
 }
 
 int main()
@@ -61,6 +79,13 @@ int main()
     root->right->left = new node(90);
     root->right->right = new node(100);
 
+<<<<<<< HEAD
+    vector<int> ans = zigZagTraversal(root);
+
+    for (auto it : ans)
+    {
+        cout << it << " ";
+=======
     vector<vector<int>> ans = zigzagLevelOrder(root);
 
     for (auto it : ans)
@@ -69,6 +94,7 @@ int main()
         {
             cout << it2 << " ";
         }
+>>>>>>> c7b590fee7d4ab3758d25d6ea8016b29a8e1e27c
     }
 
     return 0;
