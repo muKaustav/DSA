@@ -100,14 +100,21 @@ void inorder(Node *root)
     inorder(root->right);
 }
 
-void preorder(Node *root)
+Node *LCA(Node *root, int n1, int n2)
 {
-    if (!root)
-        return;
+    if (!root || root->data == n1 || root->data == n2)
+        return root;
 
-    cout << root->data << " ";
-    preorder(root->left);
-    preorder(root->right);
+    Node *lnode = LCA(root->left, n1, n2);
+    Node *rnode = LCA(root->right, n1, n2);
+
+    if (lnode && rnode)
+        return root;
+
+    else if (!lnode)
+        return rnode;
+
+    return lnode;
 }
 
 int main()
@@ -118,10 +125,14 @@ int main()
     for (auto key : keys)
         root = insertBST(root, key);
 
-    inorder(root);
-    cout << endl;
+    int n1 = 4, n2 = 8;
+    Node *lca = LCA(root, n1, n2);
 
-    preorder(root);
+    if (lca)
+        cout << "LCA of " << n1 << " and " << n2 << " is " << lca->data << endl;
+
+    else
+        cout << "LCA of " << n1 << " and " << n2 << " is not found" << endl;
 
     return 0;
 }

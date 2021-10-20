@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\Trees"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"iostream": "cpp",
+			"array": "cpp",
+			"vector": "cpp",
+			"xstring": "cpp"
+		}
+	}
+}
