@@ -5,13 +5,12 @@ class node
 {
 public:
 	int data;
-	node *next, *mult;
+	node *next;
 
 	node(int val)
 	{
 		data = val;
 		next = NULL;
-		mult = NULL;
 	}
 };
 
@@ -56,26 +55,6 @@ void display(node *head)
 	cout << "NULL" << endl;
 }
 
-void connectMultiples(node *head)
-{
-	node *curr = head;
-
-	while (curr)
-	{
-		int mult = curr->data;
-
-		node *temp = curr->next;
-
-		while (temp)
-		{
-			if (temp->data % mult == 0)
-				curr->mult = temp;
-
-			temp = temp->next;
-		}
-	}
-}
-
 int main()
 {
 
@@ -92,8 +71,6 @@ int main()
 	insertAtTail(head, 9);
 
 	display(head);
-
-	connectMultiples(head);
 
 	return 0;
 }

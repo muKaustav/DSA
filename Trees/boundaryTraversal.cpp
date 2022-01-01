@@ -91,9 +91,7 @@ int main()
     vector<int> v = printBoundary(root);
 
     for (auto i : v)
-    {
         cout << i << " ";
-    }
 
     return 0;
 }

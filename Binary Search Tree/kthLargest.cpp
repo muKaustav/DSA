@@ -1,18 +1,21 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Node {
+class Node
+{
 public:
   int data;
   Node *left, *right;
 
-  Node(int val) {
+  Node(int val)
+  {
     data = val;
     left = right = NULL;
   }
 };
 
-Node *insertBST(Node *root, int val) {
+Node *insertBST(Node *root, int val)
+{
   if (!root)
     return new Node(val);
 
@@ -25,7 +28,8 @@ Node *insertBST(Node *root, int val) {
   return root;
 }
 
-void inorder(Node *root) {
+void inorder(Node *root)
+{
   if (!root)
     return;
 
@@ -34,7 +38,8 @@ void inorder(Node *root) {
   inorder(root->right);
 }
 
-int solve(Node *root, int k, int &count) {
+int solve(Node *root, int k, int &count)
+{
   if (!root)
     return INT_MIN;
 
@@ -51,12 +56,14 @@ int solve(Node *root, int k, int &count) {
   return solve(root->left, k, count);
 }
 
-int kthLargest(Node *root, int k) {
+int kthLargest(Node *root, int k)
+{
   int count = 0;
   return solve(root, k, count);
 }
 
-int main() {
+int main()
+{
   int keys[] = {20, 8, 4, 12, 10, 14, 22};
   Node *root = NULL;
 
@@ -67,7 +74,8 @@ int main() {
 
   int k = 3;
   int count = 0;
-  cout << "\n" << kthLargest(root, k) << endl;
+  cout << "\n"
+       << kthLargest(root, k) << endl;
 
   return 0;
 }
