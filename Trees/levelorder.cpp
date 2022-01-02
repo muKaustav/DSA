@@ -15,7 +15,7 @@ struct node
 
 void printLevelOrder(node *root)
 {
-    if (root == NULL)
+    if (!root)
         return;
 
     queue<node *> q;
@@ -27,7 +27,7 @@ void printLevelOrder(node *root)
         node *node = q.front();
         q.pop();
 
-        if (node != NULL)
+        if (node)
         {
             cout << node->data << " ";
             if (node->left != NULL)
@@ -89,10 +89,7 @@ int main()
     root->left->left = new node(40);
     root->left->right = new node(60);
 
-    int level;
-    cin >> level;
-
-    cout << sumAtK(root, level);
+    printLevelOrder(root);
 
     return 0;
 }
