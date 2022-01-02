@@ -1,55 +1,85 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-class node{
+class node
+{
 public:
 	int data;
-	node* next;
+	node *next, *mult;
 
-	node(int val){
+	node(int val)
+	{
 		data = val;
 		next = NULL;
+		mult = NULL;
 	}
 };
 
-void insertAtHead(node* &head, int val){
-	node* n = new node(val);
+void insertAtHead(node *&head, int val)
+{
+	node *n = new node(val);
 
 	n->next = head;
 	head = n;
 }
 
-void insertAtTail(node* &head, int val){
-	node* n = new node(val);
+void insertAtTail(node *&head, int val)
+{
+	node *n = new node(val);
 
-	if(head == NULL){
+	if (head == NULL)
+	{
 		head = n;
 		return;
 	}
 
-	node* temp = head;
+	node *temp = head;
 
-	while(temp->next != NULL){
+	while (temp->next != NULL)
+	{
 		temp = temp->next;
 	}
 
 	temp->next = n;
 }
 
-void display(node* head){
-	node* temp = head;
+void display(node *head)
+{
+	node *temp = head;
 
-	while(temp != NULL){
-		cout<<temp->data<<" -> ";
+	while (temp != NULL)
+	{
+		cout << temp->data << " -> ";
 		temp = temp->next;
 	}
 
-	cout<<"NULL"<<endl;
+	cout << "NULL" << endl;
 }
 
-int main(){
+void connectMultiples(node *head)
+{
+	node *curr = head;
 
-	node* head = NULL;
+	while (curr)
+	{
+		int mult = curr->data;
+
+		node *temp = curr->next;
+
+		while (temp)
+		{
+			if (temp->data % mult == 0)
+				curr->mult = temp;
+
+			temp = temp->next;
+		}
+	}
+}
+
+int main()
+{
+
+	node *head = NULL;
 
 	insertAtTail(head, 1);
 	insertAtTail(head, 2);
@@ -62,6 +92,8 @@ int main(){
 	insertAtTail(head, 9);
 
 	display(head);
-	
+
+	connectMultiples(head);
+
 	return 0;
 }

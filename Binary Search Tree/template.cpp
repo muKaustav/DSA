@@ -31,8 +31,10 @@ Node *insertBST(Node *root, int val)
 Node *inorderSuccessor(Node *root)
 {
     Node *curr = root->right;
+
     while (curr->left)
         curr = curr->left;
+
     return curr;
 }
 
@@ -98,31 +100,28 @@ void inorder(Node *root)
     inorder(root->right);
 }
 
+void preorder(Node *root)
+{
+    if (!root)
+        return;
+
+    cout << root->data << " ";
+    preorder(root->left);
+    preorder(root->right);
+}
+
 int main()
 {
+    int keys[] = {20, 8, 4, 12, 10, 14, 22};
     Node *root = NULL;
-    root = insertBST(root, 6);
-    insertBST(root, 3);
-    insertBST(root, 5);
-    insertBST(root, 2);
-    insertBST(root, 4);
-    insertBST(root, 7);
+
+    for (auto key : keys)
+        root = insertBST(root, key);
 
     inorder(root);
     cout << endl;
 
-    deleteBST(root, 3);
-    inorder(root);
-
-    // int val, found;
-    // cin >> val;
-
-    // found = searchBST(root, val);
-
-    // if (found != -1)
-    //     cout << "Key found: " << found << endl;
-    // else
-    //     cout << "Key not found" << endl;
+    preorder(root);
 
     return 0;
 }
