@@ -1,10 +1,13 @@
 {
-    "files.associations": {
-        "array": "cpp",
-        "string": "cpp",
-        "string_view": "cpp",
-        "iostream": "cpp",
-        "new": "cpp"
-    },
-    "C_Cpp.errorSquiggles": "Disabled"
+	"files.associations": {
+		"*.ejs": "html",
+		"array": "cpp",
+		"string": "cpp",
+		"string_view": "cpp",
+		"iostream": "cpp",
+		"new": "cpp",
+		"queue": "cpp",
+		"xiosbase": "cpp"
+	},
+	"C_Cpp.errorSquiggles": "Disabled"
 }

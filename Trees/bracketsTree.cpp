@@ -13,8 +13,6 @@ public:
     }
 };
 
-vector 
-
 int main()
 {
     node *root = new node(10);
