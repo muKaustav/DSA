@@ -110,6 +110,16 @@ void preorder(Node *root)
     preorder(root->right);
 }
 
+void inorderArr(Node *root, vector<int> &sortedArr)
+{
+    if (!root)
+        return;
+
+    inorderArr(root->left, sortedArr);
+    sortedArr.push_back(root->data);
+    inorderArr(root->right, sortedArr);
+}
+
 int main()
 {
     int keys[] = {20, 8, 4, 12, 10, 14, 22};
@@ -118,10 +128,12 @@ int main()
     for (auto key : keys)
         root = insertBST(root, key);
 
-    inorder(root);
-    cout << endl;
+    vector<int> sortedArr;
 
-    preorder(root);
+    inorderArr(root, sortedArr);
+
+    for (auto it : sortedArr)
+        cout << it << " ";
 
     return 0;
 }

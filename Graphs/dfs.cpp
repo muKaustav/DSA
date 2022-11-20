@@ -1,66 +1,75 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void adjacencyList(vector<vector<int>> &adj, int m)
+class Graph
 {
-    for (int i = 0; i < m; i++)
+    int V;
+    vector<int> *adj;
+
+public:
+    Graph(int V)
+    {
+        this->V = V;
+        adj = new vector<int>[V];
+    }
+
+    void addEdge(int u, int v)
+    {
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+
+    void printAdjList()
+    {
+        for (int i = 0; i < V; i++)
+        {
+            cout << i << " -> ";
+
+            for (auto x : adj[i])
+                cout << x << " ";
+
+            cout << endl;
+        }
+    }
+
+    void DFSUtil(int src, vector<bool> &visited)
+    {
+        visited[src] = true;
+
+        cout << src << " ";
+
+        for (auto x : adj[src])
+            if (!visited[x])
+                DFSUtil(x, visited);
+    }
+
+    void DFS(int src)
+    {
+        vector<bool> visited(V, false);
+
+        DFSUtil(src, visited);
+    }
+};
+
+int main()
+{
+    int V, E;
+    cin >> V >> E;
+
+    Graph g(V);
+
+    for (int i = 0; i < E; i++)
     {
         int u, v;
         cin >> u >> v;
 
-        adj[u].push_back(v);
-        adj[v].push_back(u);
-    }
-}
-
-void dfs(int node, vector<int> &visited, vector<vector<int>> &adj, vector<int> &dfsOfGraph)
-{
-    dfsOfGraph.push_back(node);
-    visited[node] = 1;
-
-    for (auto it : adj[node])
-    {
-        if (!visited[it])
-            dfs(it, visited, adj, dfsOfGraph);
-    }
-}
-
-void dfsUtil(int V, vector<vector<int>> &adj, vector<int> &dfsOfGraph)
-{
-    vector<int> visited(V + 1, 0);
-
-    for (int i = 1; i <= V; i++)
-    {
-        if (!visited[i])
-            dfs(i, visited, adj, dfsOfGraph);
-    }
-}
-
-int main()
-{
-    int n, m, i = 0;
-    cin >> n >> m;
-
-    vector<vector<int>> adj(n + 1);
-    adjacencyList(adj, m);
-
-    for (auto it : adj)
-    {
-        cout << "Node " << i << ": ";
-
-        for (auto it2 : it)
-            cout << it2 << " ";
-
-        cout << endl;
-
-        i++;
+        g.addEdge(u, v);
     }
 
-    vector<int> dfsOfGraph;
-    dfsUtil(n, adj, dfsOfGraph);
+    int source;
+    cin >> source;
 
-    for (auto it : dfsOfGraph)
-        cout << it << " ";
+    g.DFS(source);
 
     return 0;
 }

@@ -1,76 +1,89 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void adjacencyList(vector<vector<int>> &adj, int m)
+class Graph
 {
-    for (int i = 0; i < m; i++)
-    {
-        int u, v;
-        cin >> u >> v;
+    int V;
+    vector<int> *adj;
 
+public:
+    Graph(int V)
+    {
+        this->V = V;
+        adj = new vector<int>[V];
+    }
+
+    void addEdge(int u, int v)
+    {
         adj[u].push_back(v);
         adj[v].push_back(u);
     }
-}
 
-void bfs(int V, vector<vector<int>> &adj, vector<int> &bfsOfGraph)
-{
-    vector<int> visited(V + 1, 0);
-
-    for (int i = 1; i <= V; i++)
+    void printAdjList()
     {
-        if (!visited[i])
+        for (int i = 0; i < V; i++)
         {
-            queue<int> q;
-            q.push(i);
+            cout << i << " -> ";
 
-            visited[i] = 1;
+            for (auto x : adj[i])
+                cout << x << " ";
 
-            while (!q.empty())
+            cout << endl;
+        }
+    }
+
+    void BFSUtil(int src, vector<bool> &visited)
+    {
+        queue<int> q;
+        q.push(src);
+
+        visited[src] = true;
+
+        while (!q.empty())
+        {
+            int node = q.front();
+            q.pop();
+
+            cout << node << " ";
+
+            for (auto x : adj[node])
             {
-                int node = q.front();
-                q.pop();
-
-                bfsOfGraph.push_back(node);
-
-                for (auto it : adj[node])
+                if (!visited[x])
                 {
-                    if (!visited[it])
-                    {
-                        q.push(it);
-                        visited[it] = 1;
-                    }
+                    q.push(x);
+                    visited[x] = true;
                 }
             }
         }
     }
-}
+
+    void BFS(int src)
+    {
+        vector<bool> visited(V, false);
+
+        BFSUtil(src, visited);
+    }
+};
 
 int main()
 {
-    int n, m, i = 0;
-    cin >> n >> m;
+    int V, E;
+    cin >> V >> E;
 
-    vector<vector<int>> adj(n + 1);
-    adjacencyList(adj, m);
+    Graph g(V);
 
-    for (auto it : adj)
+    for (int i = 0; i < E; i++)
     {
-        cout << "Node " << i << ": ";
+        int u, v;
+        cin >> u >> v;
 
-        for (auto it2 : it)
-            cout << it2 << " ";
-
-        cout << endl;
-
-        i++;
+        g.addEdge(u, v);
     }
 
-    vector<int> bfsOfGraph;
-    bfs(n, adj, bfsOfGraph);
+    int source;
+    cin >> source;
 
-    for (auto it : bfsOfGraph)
-        cout << it << " ";
+    g.BFS(source);
 
     return 0;
 }

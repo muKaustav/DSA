@@ -49,26 +49,26 @@ void printPreorder(struct node *node)
     printPreorder(node->right);
 }
 
-void printLevelOrder(struct node *root)
+int solve(node *root)
 {
     if (!root)
-        return;
+        return 0;
+
+    int sum = 0, size;
 
     queue<node *> q;
     q.push(root);
 
-    int size;
-
     while (!q.empty())
     {
-        size = q.size();
+        size = q.size(), sum = 0;
 
         while (size--)
         {
             node *temp = q.front();
             q.pop();
 
-            cout << temp->data << " ";
+            sum += temp->data;
 
             if (temp->left)
                 q.push(temp->left);
@@ -77,19 +77,24 @@ void printLevelOrder(struct node *root)
                 q.push(temp->right);
         }
     }
+
+    return sum;
 }
 
 int main()
 {
-    node *root = new node(1);
-    root->left = new node(2);
-    root->right = new node(2);
-    root->left->left = new node(3);
-    root->left->right = new node(4);
-    root->right->left = new node(4);
-    root->right->right = new node(3);
+    node *root = new node(3);
+    root->left = new node(5);
+    root->right = new node(1);
+    root->left->left = new node(6);
+    root->left->right = new node(2);
+    root->left->right->left = new node(7);
+    root->left->right->right = new node(4);
+    root->right->left = new node(0);
+    root->right->right = new node(8);
 
-    printLevelOrder(root);
+    int ans = solve(root);
+    cout << ans;
 
     // cout << "Postorder:" << endl;
     // printPostorder(root);

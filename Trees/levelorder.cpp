@@ -30,9 +30,11 @@ void printLevelOrder(node *root)
         if (node)
         {
             cout << node->data << " ";
-            if (node->left != NULL)
+
+            if (node->left)
                 q.push(node->left);
-            if (node->right != NULL)
+
+            if (node->right)
                 q.push(node->right);
         }
 
@@ -82,12 +84,13 @@ int sumAtK(node *root, int k)
 
 int main()
 {
-
     node *root = new node(10);
     root->left = new node(20);
     root->right = new node(30);
     root->left->left = new node(40);
     root->left->right = new node(60);
+    root->left->right->right = new node(70);
+    root->right->right->right = new node(80);
 
     printLevelOrder(root);
 
