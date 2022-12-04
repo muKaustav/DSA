@@ -16,7 +16,7 @@ public:
     void addEdge(int u, int v, int w)
     {
         adj[u][v] = w;
-        adj[v][u] = w;
+        // adj[v][u] = w;
     }
 
     void printAdjMatrix()
@@ -32,33 +32,70 @@ public:
 
     void dijkstraUtil(int src)
     {
-        set<pair<int, int>> st;
+        // set implementation
+
+        // set<pair<int, int>> st;
+        // vector<int> dist(V, INT_MAX);
+
+        // st.insert({0, src});
+        // dist[src] = 0;
+
+        // while (!st.empty())
+        // {
+        //     for (auto it : st)
+        //         cout << it.first << " " << it.second << endl;
+
+        //     for (int i = 0; i < V; i++)
+        //         cout << dist[i] << " ";
+
+        //     auto p = *(st.begin());
+        //     st.erase(st.begin());
+
+        //     int node = p.second;
+        //     int nodeDist = p.first;
+
+        //     for (int i = 0; i < V; i++)
+        //     {
+        //         if (adj[node][i] != 0)
+        //         {
+        //             if (dist[i] > nodeDist + adj[node][i])
+        //             {
+        //                 auto f = st.find({dist[i], i});
+
+        //                 if (f != st.end())
+        //                     st.erase(f);
+
+        //                 dist[i] = nodeDist + adj[node][i];
+        //                 st.insert({dist[i], i});
+        //             }
+        //         }
+        //     }
+        // }
+
+
+        // priority_queue implementation
+
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
         vector<int> dist(V, INT_MAX);
 
-        st.insert({0, src});
         dist[src] = 0;
+        pq.push({0, src});
 
-        while (!st.empty())
+        while (!pq.empty())
         {
-            auto p = *(st.begin());
-            st.erase(st.begin());
+            int node = pq.top().second;
+            int nodeDist = pq.top().first;
 
-            int node = p.second;
-            int nodeDist = p.first;
+            pq.pop();
 
             for (int i = 0; i < V; i++)
             {
-                if (adj[node][i] != 0)
+                if (adj[node][i])
                 {
                     if (dist[i] > nodeDist + adj[node][i])
                     {
-                        auto f = st.find({dist[i], i});
-
-                        if (f != st.end())
-                            st.erase(f);
-
                         dist[i] = nodeDist + adj[node][i];
-                        st.insert({dist[i], i});
+                        pq.push({dist[i], i});
                     }
                 }
             }
