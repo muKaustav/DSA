@@ -1,77 +1,82 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class node
+class Node
 {
 public:
     int data;
-    node *left, *right;
+    Node *left, *right;
 
-    node(int val)
+    Node(int val)
     {
         data = val;
         left = right = NULL;
     }
 };
 
-void printLeftBoundary(node *root, vector<int> &v)
+void printLeftBoundary(Node *root, vector<int> &ans)
 {
     if (!root)
         return;
-
-    if (!root->left && !root->right)
-        return;
-
-    v.push_back(root->data);
 
     if (root->left)
-        printLeftBoundary(root->left, v);
+    {
+        ans.push_back(root->data);
+        printLeftBoundary(root->left, ans);
+    }
 
-    else
-        printLeftBoundary(root->right, v);
+    else if (root->right)
+    {
+        ans.push_back(root->data);
+        printLeftBoundary(root->right, ans);
+    }
 }
 
-void printRightBoundary(node *root, vector<int> &v)
+void printRightBoundary(Node *root, vector<int> &ans)
 {
     if (!root)
-        return;
-
-    if (!root->left && !root->right)
         return;
 
     if (root->right)
-        printRightBoundary(root->right, v);
+    {
+        printRightBoundary(root->right, ans);
+        ans.push_back(root->data);
+    }
 
-    else
-        printRightBoundary(root->left, v);
-
-    v.push_back(root->data);
+    else if (root->left)
+    {
+        printRightBoundary(root->left, ans);
+        ans.push_back(root->data);
+    }
 }
 
-void printLeaves(node *root, vector<int> &v)
+void printLeaf(Node *root, vector<int> &ans)
 {
     if (!root)
         return;
 
-    printLeaves(root->left, v);
+    printLeaf(root->left, ans);
 
-    if (!root->left && !root->right)
-        v.push_back(root->data);
+    if (!root->right && !root->left)
+        ans.push_back(root->data);
 
-    printLeaves(root->right, v);
+    printLeaf(root->right, ans);
 }
 
-vector<int> printBoundary(node *root)
+vector<int> printBoundary(Node *root)
 {
     vector<int> ans;
 
-    if (!root || !root->left && !root->right)
+    if (!root)
         return ans;
 
     ans.push_back(root->data);
 
+    if (!root->left && !root->right)
+        return ans;
+
     printLeftBoundary(root->left, ans);
-    printLeaves(root, ans);
+    printLeaf(root, ans);
     printRightBoundary(root->right, ans);
 
     return ans;
@@ -79,14 +84,14 @@ vector<int> printBoundary(node *root)
 
 int main()
 {
-    node *root = new node(10);
-    root->left = new node(20);
-    root->right = new node(30);
-    root->left->right = new node(60);
-    root->left->right->left = new node(70);
-    root->right->left = new node(90);
-    root->right->left->left = new node(100);
-    root->right->left->right = new node(80);
+    Node *root = new Node(10);
+    root->left = new Node(20);
+    root->right = new Node(30);
+    root->left->right = new Node(60);
+    root->left->right->left = new Node(70);
+    root->right->left = new Node(90);
+    root->right->left->left = new Node(100);
+    root->right->left->right = new Node(80);
 
     vector<int> v = printBoundary(root);
 
